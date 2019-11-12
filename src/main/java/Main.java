@@ -32,7 +32,7 @@ public class Main {
         cleanNames = ReadInformation.cleanName(gamesNames);
         HTMLParser html = new HTMLParser();
         for(String cleanName : cleanNames){
-            html.getMetacriticURL(cleanName + "1");
+            html.getMetacriticURL(cleanName);
         }
 
     }
