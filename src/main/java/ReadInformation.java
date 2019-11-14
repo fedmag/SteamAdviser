@@ -44,37 +44,31 @@ class ReadInformation {
         return null;
     }
 
-
-//    static String[] cleanName(String[] games) {
-//        // Getting rid of the TM or tm at the end of some names
-//        for(int i = 0; i< games.length; i++) {
-//            if (!games[i].equals("")) {
-//                int index = games[i].length() - 2;
-//                if (games[i].substring(index).equals("tm") || games[i].substring(index).equals("TM")) {
-//                    games[i] = games[i].substring(0, index);
-//                }
-//            }
-//        }
-//        return games;
-//    }
-
-    static String[] cleanName(String[] games) {
-        // Getting rid of the TM or tm at the end of some names
+    static ArrayList<String> cleanName(String[] gamesNames) {
         ArrayList<String> namesNotNull = new ArrayList<>();
-        for(String name:games){
+        // Optimizing the name from the game to get a proper Google call
+        char chr = '+';
+
+        for(String name :gamesNames){
             if(name!=null){
+                name = name.replace(' ', chr);
+                name = name.replace("'", "");
+                name = name.replace("-", "");
+                name = name.replace("++", "");
+                name = name.replace(":", "");
+                name = name.replace(".", "");
+                name = name.replace("™", "");
+                name = name.replace("®", "");
+                name = name.replace("©", "");
                 namesNotNull.add(name);
             }
         }
-        for(String game:namesNotNull) {
-                int index = game.length() - 2;
-                if (game != null) {
-                if (game.substring(index).equals("tm") || game.substring(index).equals("TM")) {
-                    game = game.substring(0, index);
-                }
-            }else {
-                    game = "";
-                }
-            }return games;
+        // Getting rid of the TM or tm at the end of some names
+        for(String gameName :namesNotNull) {
+                int index = gameName.length() - 2;
+            if (gameName.substring(index).equals("tm") || gameName.substring(index).equals("TM")) {
+                gameName = gameName.substring(0, index);
+            }
+        }return namesNotNull;
         }
     }

@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Main {
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws IOException {
         // Getting user URL from which we can then get the info
         ReadInformation infoObject = new ReadInformation();
         String url;
@@ -24,16 +24,11 @@ public class Main {
         String[] gamesNames;
         String[] cleanNames;
         gamesNames = ReadInformation.deserializeJson();
-        for(String game:gamesNames) {
-            if (game != null) {
-                System.out.println(game);
-            }
+        cleanNames = infoObject.cleanName(gamesNames).toArray(new String[0]);
+        for (String cleanName : cleanNames) {
+            String googleURL = urlObject.googleSearchQuery(cleanName, "metacritic");
+            System.out.println(googleURL);
         }
-        cleanNames = ReadInformation.cleanName(gamesNames);
-        HTMLParser html = new HTMLParser();
-        for(String cleanName : cleanNames){
-            html.getMetacriticURL(cleanName);
-        }
-
     }
-}
+    }
+
