@@ -24,17 +24,18 @@ class ReadInformation {
             bufferedReader.close();
 
             int gameCount = data.response.game_count;
-//            List<Data.Response.Games> games = data.response.games;  potremmo poi passare games nel for loop, ma non ha molto senso
+
             int i = 0;
             String[] games = new String[gameCount];
             for (Data.Response.Games game : data.response.games) {
                 String name = game.name;
                 name = name.toLowerCase();
+                // getting rid of test and server games
                 if (!name.contains("test")) {
                     games[i] = name;
                     i++;
                 } else{
-                    games[i] = "ciccio";
+                    games[i] = "not a good one";
                 }
             }
             return games;
@@ -51,6 +52,7 @@ class ReadInformation {
 
         for(String name :gamesNames){
             if(name!=null){
+                // formatting properly
                 name = name.replace(' ', chr);
                 name = name.replace("'", "");
                 name = name.replace("-", "");
