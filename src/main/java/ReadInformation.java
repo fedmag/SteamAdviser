@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 class ReadInformation {
     private String id = "76561198077512418";
-    private String key = "DBBDC8EAB25ED2721D3986C8577790DA";
+    private String key = "***";
 
     String getURL(){
 
